@@ -1,0 +1,104 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
+<configuration>
+  <property>
+    <name>hbase.master.port</name>
+    <value>60000</value>
+    <description>The port the HBase Master should bind to.</description>
+  </property>
+  <property>
+    <name>zookeeper.znode.parent</name>
+    <value>/hbase96</value>
+    <description>Root ZNode for HBase in ZooKeeper. All of HBase's ZooKeeper
+      files that are configured with a relative path will go under this node.
+      By default, all of HBase's ZooKeeper file path are configured with a
+      relative path, so they will all go under this directory unless changed.
+    </description>
+  </property>
+  <property>
+    <name>hbase.client.write.buffer</name>
+    <value>5242880</value>
+    <description>Default size of the HTable clien write buffer in bytes.
+    A bigger buffer takes more memory -- on both the client and server
+    side since server instantiates the passed write buffer to process
+    it -- but a larger buffer size reduces the number of RPCs made.
+    For an estimate of server-side memory-used, evaluate
+    hbase.client.write.buffer * hbase.regionserver.handler.count
+    </description>
+  </property>
+  <property>
+    <name>hbase.client.pause</name>
+    <value>500</value>
+    <description>General client pause value.  Used mostly as value to wait
+    before running a retry of a failed get, region lookup, etc.</description>
+  </property>
+  <property>
+    <name>hbase.client.retries.number</name>
+    <value>20</value>
+    <description>Maximum retries.  Used as maximum for all retryable
+    operations such as fetching of the root region from root region
+    server, getting a cell's value, starting a row update, etc.
+    Default: 10.
+    </description>
+  </property> 
+  <property>
+    <name>hbase.bulkload.retries.number</name>
+    <value>10</value>
+    <description>Maximum retries.  This is maximum number of iterations
+    to atomic bulk loads are attempted in the face of splitting operations
+    0 means never give up.  Default: 0.
+    </description>
+  </property>
+  <property>
+    <name>hbase.client.scanner.caching</name>
+    <value>100</value>
+    <description>Number of rows that will be fetched when calling next
+    on a scanner if it is not served from (local, client) memory. Higher
+    caching values will enable faster scanners but will eat up more memory
+    and some calls of next may take longer and longer times when the cache is empty.
+    Do not set this value such that the time between invocations is greater
+    than the scanner timeout; i.e. hbase.regionserver.lease.period
+    </description>
+  </property>
+  <property>
+    <name>hbase.client.keyvalue.maxsize</name>
+    <value>10485760</value>
+    <description>Specifies the combined maximum allowed size of a KeyValue
+    instance. This is to set an upper boundary for a single entry saved in a
+    storage file. Since they cannot be split it helps avoiding that a region
+    cannot be split any further because the data is too large. It seems wise
+    to set this to a fraction of the maximum region size. Setting it to zero
+    or less disables the check.
+    </description>
+  </property>
+  <property>
+    <name>zookeeper.session.timeout</name>
+    <value>180000</value>
+    <description>ZooKeeper session timeout.
+      HBase passes this to the zk quorum as suggested maximum time for a
+      session (This setting becomes zookeeper's 'maxSessionTimeout').  See
+      http://hadoop.apache.org/zookeeper/docs/current/zookeeperProgrammers.html#ch_zkSessions
+      "The client sends a requested timeout, the server responds with the
+      timeout that it can give the client. " In milliseconds.
+    </description>
+  </property>
+   <property>
+    <name>hbase.zookeeper.quorum</name>
+    <value>hadoop01,hadoop02,hadoop03,hadoop05</value>
+    <description>Comma separated list of servers in the ZooKeeper Quorum.
+    For example, "host1.mydomain.com,host2.mydomain.com,host3.mydomain.com".
+    By default this is set to localhost for local and pseudo-distributed modes
+    of operation. For a fully-distributed setup, this should be set to a full
+    list of ZooKeeper quorum servers. If HBASE_MANAGES_ZK is set in hbase-env.sh
+    this is the list of servers which we will start/stop ZooKeeper on.
+    </description>
+  </property>
+  <property>
+    <name>hbase.zookeeper.property.clientPort</name>
+    <value>2181</value>
+    <description>Property from ZooKeeper's config zoo.cfg.
+    The port at which the clients will connect.
+    </description>
+  </property>
+    
+</configuration>

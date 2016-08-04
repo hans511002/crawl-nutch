@@ -1,0 +1,451 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
+
+<!-- Put site-specific property overrides in this file. -->
+<configuration> 
+<property>
+  <name>io.serializations</name>
+  <value>org.apache.gora.mapreduce.StringSerialization,org.apache.gora.mapreduce.PersistentSerialization,org.apache.hadoop.io.serializer.WritableSerialization</value>
+</property>
+
+	<property> 
+		<name>segmentparser.order</name> 
+		<value>org.apache.nutch.parse.element.ProidsParses org.apache.nutch.parse.element.ExprCalcParses org.apache.nutch.parse.element.PolicticTypeParses org.apache.nutch.parse.element.AttrsParses</value> 
+		<description>Default class for storing data</description> 
+	</property> 
+
+	<property>
+		<name>file.content.limit</name>
+		<value>10485760</value>
+	</property>
+	<property>
+		<name>http.content.limit</name>
+		<value>10485760</value>
+	</property>
+	<property>
+		<name>ftp.content.limit</name>
+		<value>10485760</value> 
+	</property>
+	<property>
+		<name>http.timeout</name>
+		<value>30000</value> 
+	</property>
+	<property>
+	<name>solr.commit.size</name>
+	<value>200</value>
+	</property>
+	<property>
+	<name>gora.buffer.write.limit</name>
+	<value>100</value>
+	</property>
+	<property>
+		  <name>http.accept.language</name>
+		  <value>en-us,en-gb,zh-cn,en;q=0.7,*;q=0.3</value>
+		  <description>Value of the "Accept-Language" request header field.
+		  This allows selecting non-English language as default one to retrieve.
+		  It is a useful setting for search engines build for certain national group.
+		  </description>
+		</property>
+		<property>
+		  <name>http.accept</name>
+		  <value>text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8</value>
+		  <description>Value of the "Accept" request header field.
+		  "text/html,application/xml;q=0.9,application/xhtml+xml,text/xml;q=0.9,text/plain;q=0.8,image/png,*/*;q=0.5"
+		  </description>
+		</property>
+		<property>
+		  <name>parser.character.encoding.default</name>
+		  <value>utf-8</value>
+		  <description>The character encoding to fall back to when no other information windows-1252
+		  is available</description>
+		</property>
+<!-- -->		<property>
+			<name>db.fetch.schedule.class</name>
+			<value>org.apache.nutch.crawl.DbConfigFetchSchedule</value>
+			<description>The implementation of fetch schedule. DefaultFetchSchedule simply
+			adds the original fetchInterval to the last fetch time, regardless of
+			page changes.</description>
+		</property>
+		 
+		<property>
+  <name>parser.character.encoding.default</name>
+  <value>utf-8</value>
+  <description>The character encoding to fall back to when no other information
+  is available</description>
+</property>
+<property>
+  <name>plugin.folders</name>
+  <value>src/plugin</value>
+</property>
+
+<property>
+  <name>plugin.includes</name>
+ <value>protocol-(httpclient-component|ftp|sftp|file)|urlfilter-regex|parse-(html|tika|segment)|index-(basic|anchor|more)|urlnormalizer-(pass|regex|basic)|scoring-opic</value>
+ <description>
+ http|httpclient
+ Regular expression naming plugin directory names to
+  include.  Any plugin not matching this expression is excluded.
+  In any case you need at least include the nutch-extensionpoints plugin. By
+  default Nutch includes crawling just HTML and plain text via HTTP,
+  and basic indexing and search plugins. In order to use HTTPS please enable 
+  protocol-httpclient, but be aware of possible intermittent problems with the 
+  underlying commons-httpclient library.
+  </description>
+</property>		
+
+<property>
+  <name>parse.plugin.file</name>
+  <value>parse-plugins.xml</value>
+  <description>The name of the file that defines the associations between
+  content-types and parsers.</description>
+</property>
+
+
+<property>
+  <name>storage.data.store.class</name>
+  <value>org.apache.gora.mongo.store.MongoStore</value>
+</property>
+
+
+<property>
+  <name>storage.schema.webpage</name>
+  <value>webpage</value>
+  <description>This value holds the schema name used for Nutch web db.
+  Note that Nutch ignores the value in the gora mapping files, and uses
+  this as the webpage schema name.
+  </description>
+</property>
+<property>
+  <name>partition.url.mode</name>
+  <value>url</value>
+  <description>Determines how to partition URLs. Default value is 'byHost', 
+  also takes 'byDomain' or 'byIP' byCFG. url
+  </description>
+</property>
+<property>
+  <name>fetcher.queue.mode</name>
+  <value>byIP</value>
+  <description>Determines how to partition URLs. Default value is 'byHost', 
+  also takes 'byDomain' or 'byIP' . allurl
+  </description>
+</property>
+<property>
+  <name>generate.count.mode</name>
+  <value>cfg</value>
+  <description>Determines how to partition URLs. Default value is 'host', 
+  also takes 'domain' or 'ip' or 'cfg' all url
+  </description>
+</property>
+<property>
+  <name>storage.schema.host</name>
+  <value>host</value>
+  <description>This value holds the schema name used for Nutch host db.
+  Note that Nutch ignores the value in the gora mapping files, and uses
+  this as the host schema name.
+  </description>
+</property>
+
+<property>
+  <name>storage.crawl.id</name>
+  <value></value>
+  <description>This value helps differentiate between the datasets that
+  the jobs in the crawl cycle generate and operate on. The value will
+  be input to all the jobs which then will use it as a prefix when
+  accessing to the schemas. The default configuration uses no id to prefix
+  the schemas. The value could also be given as a command line argument
+  to each job.
+  </description>
+</property>
+<property>
+  <name>storage.schema.webpageindex</name>
+  <value>webpageindex</value>
+  <description>This value holds the schema name used for Nutch host db.
+  Note that Nutch ignores the value in the gora mapping files, and uses
+  this as the host schema name.
+  </description>
+</property>
+		<property>
+			<name>inject.db.driver</name>
+			<value>org.gjt.mm.mysql.Driver</value>
+			<description>oracle.jdbc.driver.OracleDriver</description>
+		</property>
+		<property>
+			<name>inject.db.connecturl</name>
+			<value>jdbc:mysql://hadoop01:3306/mopt?useUnicode=true&amp;characterEncoding=utf-8</value>
+			<description>jdbc:oracle:thin:@192.168.11.11:1521:ora10</description>
+		</property>
+		<property>
+			<name>inject.db.connectuser</name>
+			<value>mopt</value>
+		</property>
+		<property>
+			<name>inject.db.connectpass</name>
+			<value>mopt</value>
+		</property>
+		<property>
+			<name>inject.db.selectsql</name>
+			<value>select BASE_URL, CRAWL_TYPE ,FETCH_INTERVAL,SITE_SORCE ,META_DATA,
+			DATE_FORMAT(MODIFY_DATE,'%Y-%m-%d %H:%i:%s') MODIFY_DATE,CONFIG_TYPE from 
+			 ERIT_KL_FETCH_BASE_URL where URL_STATE=1 and MODIFY_DATE &gt; STR_TO_DATE('{LASTLOAD_DATE}','%Y-%m-%d %H:%i:%s')</value>
+			<description>
+			ORACLE: select BASE_URL, CRAWL_TYPE ,FETCH_INTERVAL,SITE_SORCE ,META_DATA,
+			to_char(MODIFY_DATE,'yyyy-mm-dd hh24:mi:ss') MODIFY_DATE,CONFIG_TYPE from 
+			 ERIT_KL_FETCH_BASE_URL where URL_STATE=1 and MODIFY_DATE &gt; to_date('{LASTLOAD_DATE}','yyyy-mm-dd hh24:mi:ss')</description>
+		</property>
+		<property>
+			<name>base.url.config.sql</name>
+			<value>select BASE_URL, CRAWL_TYPE ,FETCH_INTERVAL,SITE_SORCE,FETCH_DEPTH
+					 ,NEED_LOGIN,LOGIN_TYPE,LOGIN_ADDRESS,LOGIN_JS,LOGIN_CLASS
+					 ,SUB_FILTERS,SUB_FETCH_INTERVAL,ROOT_SITE_ID,MEDIA_TYPE_ID,MEDIA_LEVEL_ID
+					,TOPIC_TYPE_ID,area_id,CONFIG_TYPE,MATCH_RULE,SUB_RULES
+					,confs,BASE_URL_ID,UPDATE_FILTER,ONCE_FETCH_COUNT,HTTPCLIENT_CONFIG
+					,URL_FORMAT from  ERIT_KL_FETCH_BASE_URL where URL_STATE=1 order by BASE_URL</value>
+		</property>
+
+<property>
+  <name>db.fetch.schedule.adaptive.dec_rate</name>
+  <value>0.5</value>
+  <description> 页面修改过的抓取周期减变量百分比
+  </description>
+</property>
+<property>
+  <name>db.fetch.schedule.adaptive.inc_rate</name>
+  <value>0.5</value>
+  <description> 页面修改过的抓取周期加变量百分比 
+  </description>
+</property>
+<property>
+  <name>anchorIndexingFilter.deduplicate</name>
+  <value>false</value>
+  <description> 是否删除重复的来源 getInlinks[].getValue() 
+  </description>
+</property>
+<property>
+	<name>auchor.local.explorer.proxy.address</name>
+	<value>http://localhost/proxyAppMoz/servlet/data</value> 
+	<description>http://localhost/proxyAppMoz/servlet/data</description> 
+</property>
+<property>
+	<name>auchor.local.explorer.proxy.username</name>
+	<value>nutch</value> 
+</property>
+<property>
+	<name>auchor.local.explorer.proxy.password</name>
+	<value>nutch</value> 
+</property>
+<property>
+  <name>nutch.serial.steps</name>
+  <value>generat,fetch,segmentIndex</value>
+  <description> 由于资源影响需要串行运行的步骤  </description>
+</property>
+<property>
+  <name>nutch.map.serial.step</name>
+  <value>generat,fetch,parse,dbupdate,segmentParse,segmentIndex</value>
+  <description> 在MAP中由于资源影响需要串行运行的步骤   </description>
+</property>
+<property>
+  <name>nutch.reduce.serial.step</name>
+  <value>generat,fetch,parse,dbupdate,segmentParse,segmentIndex</value>
+  <description> 在MAP中由于资源影响需要串行运行的步骤  </description>
+</property>
+<property>
+  <name>nutch.zk.stream.end</name>
+  <value>segmentExport</value>
+  <description>default segmentParse end step delete zk node of batchId  
+  		injectNode("inject", "injecting", "injected"), generatNode("generat", "generating", "generated"), fetchNode("fetch", "fetching",
+				"fetched"), parseNode("parse", "parseing", "parsed"), dbUpdateNode("dbupdate", "dbupdating", "dbupdated"), solrIndexNode(
+				"solrindex", "indexing", "indexed"), segmentParsNode("segmentParse", "segmentParsing", "segmentParsed"),segmentIndexNode(
+				"segmentIndex", "segmentIndexing", "segmentIndexed"), segmentAdvParseNode("segmentAdvParse", "segmentAdvParsing",
+				"segmentAdvParsed");
+  </description>
+</property>
+
+	<property>
+	  <name>step.solrindex.control.key</name>
+	  <value>true</value>
+	  <description>是否跳过普通全文索引步骤 </description>
+	</property>
+	<property>
+	  <name>parse.content.type</name>
+	  <value>text/html,application/xhtml+xml,application/xml,text/plain</value>
+	  <description>能解析要素内容的类型 </description>
+	</property>
+	<property>
+	  <name>parse.content.type</name>
+	  <value>text/html,application/xhtml+xml,application/xml,text/plain</value>
+	  <description>能解析要素内容的类型 </description>
+	</property>
+	<property>
+	  <name>segment.parse.base.config.sql</name>
+	  <value>select BASE_URL,CONFIG_TYPE, MATCH_RULE,BASE_URL_ID from  ERIT_KL_FETCH_BASE_URL where URL_STATE=1 order by BASE_URL 
+	  </value>
+	  <description> </description>
+	</property>
+	<property>
+	  <name>segment.group.rule.sql</name>
+	  <value>  SELECT g.SEGMENT_GROUP_ID,g.SEGMENT_GROUP_NAME,g.SEGMENT_GROUP_URL_RULE,a.BASE_URL 
+	  FROM ERIT_KL_BASE_SEGMENT_GROUP g INNER JOIN ERIT_KL_FETCH_BASE_URL a
+      ON a.BASE_URL_ID=g.BASE_URL_ID AND a.URL_STATE=1
+      ORDER BY g.BASE_URL_ID,g.order_id,g.SEGMENT_GROUP_ID
+	  </value>
+	  <description> </description>
+	</property>
+	<property>
+	  <name>segment.parse.rule.sql</name>
+	  <value>SELECT a.BASE_URL,b.SEGMENT_COL_NAME,b.SEGMENT_RULES,b.SEGMENT_GROUP_ID,b.BASE_SEGMENT_ID FROM ERIT_KL_FETCH_BASE_URL a 
+	  INNER  JOIN ERIT_KL_BASE_SEGMENT  b ON a.BASE_URL_ID=b.BASE_URL_ID
+	  INNER JOIN ERIT_KL_SEGMENT c ON c.SEGMENT_ID=b.SEGMENT_ID  
+	  WHERE a.URL_STATE=1 and b.SEGMENT_STATE=1 ORDER BY a.BASE_URL,c.ORDER_ID,b.SEGMENT_COL_NAME</value>
+	  <description> </description>
+	</property>
+	<property>
+	  <name>topic.parse.rule.sql</name>
+	  <value>SELECT a.PARENT_TOPIC_TYPE_ID,topic_type_id,topic_parse_rule,a.TOPIC_TYPE_NAME FROM ERIT_KL_TOPIC_TYPE a WHERE a.topic_parse_rule IS NOT NULL OR 
+EXISTS (SELECT 1 FROM ERIT_KL_TOPIC_TYPE b WHERE b.PARENT_TOPIC_TYPE_ID= a.TOPIC_TYPE_ID )
+ORDER BY a.ORDER_ID,a.MEDIA_TYPE_ID,a.PARENT_TOPIC_TYPE_ID,a.TOPIC_TYPE_ID </value>
+	  <description></description>
+	</property>
+	<property>
+	  <name>segment.parse.polictic.sql</name>
+	  <value>SELECT a.POLITIC_TYPE_ID,a.POLITIC_TYPE_KEY_RULES FROM ERIT_KL_POLITIC_TYPE a order by a.POLITIC_TYPE_ID </value>
+	  <description></description>
+	</property>
+	<property>
+	  <name>segment.parse.attr.sql</name>
+	  <value>SELECT a.ATTR_ID,a.ATTR_TYPE_KEY_RULES FROM  ERIT_KL_PAGE_ATTRS a </value>
+	  <description> </description>
+	</property>
+	<property>
+	  <name>segment.col.right.perent</name>
+	  <value>0.5</value>
+	  <description>字段解析正确率 </description>
+	</property>
+	<property>
+	  <name>solr.server.url</name>
+	  <value>http://192.168.10.101:8080/solr/search_engine</value>
+	  <description> </description>
+	</property>
+	<property>
+	  <name>solr.collection</name>
+	  <value>mopt</value>
+	  <description> </description>
+	</property>
+	<property>
+	  <name>solr.segment.url</name>
+	  <value>http://192.168.10.101:8080/solr/mopt</value>
+	  <description> </description>
+	</property>
+	<property>
+	  <name>nutch.zk.root.node</name>
+	  <value>/nutch_mopt</value>
+	  <description> </description>
+	</property>
+
+	<property>
+	  <name>fetcher.server.delay</name>
+	  <value>0.0</value>
+	  <description>The number of seconds the fetcher will delay between 
+	   successive requests to the same server.</description>
+	</property>
+<property>
+  <name>fetcher.server.min.delay</name>
+  <value>0.0</value>
+  <description>The minimum number of seconds the fetcher will delay between 
+  successive requests to the same server. This value is applicable ONLY
+  if fetcher.threads.per.host is greater than 1 (i.e. the host blocking
+  is turned off).</description>
+</property>
+
+<property>
+  <name>elastic.cluster</name>
+  <value>elasticsearch</value>
+  <description>es集群名称</description>
+</property>
+<property>
+  <name>elastic.index</name>
+  <value>mopt</value>
+  <description>es索引名称</description>
+</property>
+<property>
+  <name>elastic.max.bulk.docs</name>
+  <value>500</value>
+  <description>es最大批量提交文档数</description>
+</property>
+<property>
+  <name>elastic.max.bulk.size</name>
+  <value>5001001</value>
+  <description>es最大批量提交文档字节数</description>
+</property>
+<property>
+  <name>elastic.commit.size</name>
+  <value>300</value>
+  <description></description>
+</property>
+<property>
+  <name>elastic.server.url</name>
+  <value>192.168.10.101,192.168.10.102,192.168.10.103,192.168.10.104,192.168.10.105,192.168.10.106</value>
+  <description>es服务器地址,多个以逗号(,)分隔</description>
+</property> 
+
+<property>
+	<name>export.db.driver</name>
+	<value>org.gjt.mm.mysql.Driver</value>
+	<description>oracle.jdbc.driver.OracleDriver</description>
+</property>
+<property>
+	<name>export.db.connecturl</name>
+	<value>jdbc:mysql://192.168.10.11:3306/mopt?useUnicode=true&amp;characterEncoding=utf-8</value>
+	<description>jdbc:oracle:thin:@192.168.11.11:1521:ora10</description>
+</property>
+<property>
+	<name>export.db.connectuser</name>
+	<value>mopt</value>
+</property>
+<property>
+	<name>export.db.connectpass</name>
+	<value>mopt</value>
+</property>
+<property>
+	<name>export.db.table</name>
+	<value>M_SCJST:149;M_SCJSW_ZBGG:151</value>
+	<description></description>
+</property>
+<property>
+	<name>export.db.column.auto</name>
+	<value>true</value>
+	<description>自动在对应的表中添加没有的字段，默认为false</description>
+</property>
+<property>
+	<name>export.db.column.sql</name>
+	<value>ALTER TABLE {table} ADD {column} text</value>
+	<description></description>
+</property>
+
+<!-- fetcher.queue.use.host.settings
+
+
+fetcher.store.headers
+
+	public static String configSelectSql = "base.url.config.sql";
+	public static String stepConfigUrl = "step.stepConfigUrl.key";
+
+ 	public static String injectZookeeperPath = "nutch.zk.inject.node";
+	public static String generatZookeeperPath = "nutch.zk.generat.node";
+	public static String fetchZookeeperPath = "nutch.zk.fetch.node";
+	public static String parseZookeeperPath = "nutch.zk.parse.node";
+	public static String dbUpdateZookeeperPath = "nutch.zk.dbUpdate.node";
+	public static String solrIndexZookeeperPath = "nutch.zk.solrIndex.node";
+	public static String stepZkBatchDateKey = "step.current.time";
+	// public static String injectInDateKey = "nutch.zk.inject.lastdate";
+	public static String streamZKstepEnd = "nutch.zk.stream.end";// indexed
+		INC_RATE = conf.getFloat("db.fetch.schedule.adaptive.inc_rate", 0.2f);
+		DEC_RATE = conf.getFloat("db.fetch.schedule.adaptive.dec_rate", 0.2f);
+		MIN_INTERVAL = conf.getInt("db.fetch.schedule.adaptive.min_interval", 60);
+		MAX_INTERVAL = conf.getInt("db.fetch.schedule.adaptive.max_interval", SECONDS_PER_DAY * 365); // 1 year
+		SYNC_DELTA = conf.getBoolean("db.fetch.schedule.adaptive.sync_delta", true);
+		SYNC_DELTA_RATE = conf.getFloat("db.fetch.schedule.adaptive.sync_delta_rate", 0.2f);
+
+ -->
+</configuration>
+ 
+

@@ -1,0 +1,116 @@
+<?xml version="1.0"?>
+<!--
+  This is the authentication configuration file for protocol-httpclient.
+  Different credentials for different authentication scopes can be
+  configured in this file. If a set of credentials is configured for a 
+  particular authentication scope (i.e. particular host, port number,
+  scheme and realm), then that set of credentials would be sent only to
+  servers falling under the specified authentication scope. Apart from
+  this at most one set of credentials can be configured as 'default'.
+  
+  When authentication is required to fetch a resource from a web-server,
+  the authentication-scope is determined from the host, port, scheme and
+  realm (if present) obtained from the URL of the page and the
+  authentication headers in the HTTP response. If it matches any
+  'authscope' in this configuration file, then the 'credentials' for
+  that 'authscope' is used for authentication. Otherwise, it would use
+  the 'default' set of credentials (with an exception which is described
+  in the next paragraph), if present. If any attribute is missing, it
+  would match all values for that attribute.
+
+  If there are several pages having different authentication realms and
+  schemes on the same web-server (same host and port, but different
+  realms and schemes), and credentials for one or more of the realms and
+  schemes for that web-server is specified, then the 'default'
+  credentials would be ignored completely for that web-server (for that
+  host and port). So, credentials to handle all realms and schemes for
+  that server may be specified explicitly by adding an extra 'authscope'
+  tag with the 'realm' and 'scheme' attributes missing for that server.
+  This is demonstrated by the last 'authscope' tag for 'example:8080' in
+  the following example.
+
+  Example:-
+    <credentials username="susam" password="masus">
+      <default realm="sso"/>
+      <authscope host="192.168.101.33" port="80" realm="login"/>
+      <authscope host="example" port="8080" realm="blogs"/>
+      <authscope host="example" port="8080" realm="wiki"/>
+      <authscope host="example" port="80" realm="quiz" scheme="NTLM"/>
+    </credentials>
+    <credentials username="admin" password="nimda">
+      <authscope host="example" port="8080"/>
+    </credentials>
+
+  In the above example, 'example:8080' server has pages with multiple
+  authentication realms. The first set of credentials would be used for
+  'blogs' and 'wiki' authentication realms. The second set of
+  credentials would be used for all other realms. For 'login' realm of
+  '192.168.101.33', the first set of credentials would be used. For any
+  other realm of '192.168.101.33' authentication would not be done. For
+  the NTLM authentication required by 'example:80', the first set of
+  credentials would be used. For 'sso' realms of all other servers, the
+  first set of credentials would be used, since it is configured as
+  'default'.
+
+  NTLM does not use the notion of realms. The domain name may be
+  specified as the value for 'realm' attribute in case of NTLM.
+-->
+
+<!-- 说明要点：
+1，在auth-configuration中未配置的站点，isHttpComponentClient为true,  通过Http Component Client请求抓取;
+   isHttpComponentClient为false或者未配置， 通过Common Http Client请求抓取（Nutch默认抓取方式）
+   httpconnectiontimeout:连接的超时时间，httpsockettimeout：获取数据的超时时间
+2，在credentials中，若指定了handle的，由handle指定的处理类抓取信息。
+        若未指定，则由Common Http Client请求抓取（Nutch默认抓取方式）
+				
+注意：Http Component Client提供的handle如下：
+HttpResponseComponentDefualt：默认抓取（不含登录）
+HttpResponseComponentServlet：抓取的站点是Servlet的，需要配置loginaction(登录地址)，listparam(参数列表，包含需要配置用户名和密码)
+HttpResponseComponentSina：针对sina的抓取（包括微博,sina官网）
+ -->
+<auth-configuration>
+	<isHttpComponentClient httpconnectiontimeout="10000" httpsockettimeout="20000">true</isHttpComponentClient>
+    <credentials username="939636293@qq.com" password="abc753951" handle="HttpResponseComponentSina" loginmaxnumber="2">
+         <default/>
+         <authscope host="weibo.com" port="80" realm="u" />
+         <authscope host="sina.com.cn" port="80" realm="u" />
+    </credentials>
+    <credentials username="123456" password="123456">
+         <default/>
+         <authscope host="localhost" port="80" realm="u">
+	         <loginaction>http://localhost:8080/servlet/LoginServlet</loginaction>
+	         <listparam>
+	         		<param name="username">123456</param>
+	         		<param name="password">123456</param>
+	         		<param name="testName">try</param>
+	         </listparam>
+         </authscope>
+    </credentials>
+    <credentials username="tomcat" password="s3cret">
+         <default/>
+         <authscope host="133.37.251.207" port="80" realm="manager"/>
+    </credentials>
+    
+    <!-- 代理服务 -->
+    <!-- 要点：
+    		1, address标识代理地址
+    		2, url配置需要由代理服务的地址(一级域名)，如www.baidu.com 应改为baidu.com, 若weibo.com则不变;可以配置多个url.
+    		   blankContent:若为true,表示如果内容为空(""),则不进行http component client抓取，
+    		   				若为false,表示如果内容为空(""),则进行http component client方式抓取。
+    		   isforce:若为true,表示如果代理服务连接不上，则不进行http component client方式抓取。
+    		                             若为false,表示如果代理服务连接不上，则进行http component client方式抓取。
+    		3, 只能通过代理服务获取页面加载的文本信息，对于非文本内容无法获取，如图片，flash等。
+    		        因此，需要结合credentials中的一起使用。
+    		4, 在windows平台上，代理服务器是通过IE浏览器登录抓取，因此需要预先在IE上登录
+    		5, 在linux平台上，....
+    		6, 代理只针对http Component client的请求
+     -->
+    <proxyserver address="http://localhost:8080/nutchCrawlDataProxyAppMoz/servlet/data">
+    	<urllist>
+    		<url isblankcontent="false" isforce="false">weibo.com</url>
+    		    		<!-- 
+    		<url isblankcontent="true" isforce="false">localhost</url>
+    		 -->
+    	</urllist>
+    </proxyserver>
+</auth-configuration>

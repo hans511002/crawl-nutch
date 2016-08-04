@@ -1,0 +1,37 @@
+1，商品展示页面：http://item.jd.com/{商品ID}.html，
+    可获取：
+        商品介绍，规格参数，装箱清单，商品评价，售后保障
+        同价位、同品牌、同类别其他商品链接
+    不直接可获取：价格，促销信息，优惠套餐 (ajax加载)
+    用htmlunit可获取价格
+2，商品评价页面：http://club.jd.com/review/{商品ID}-0-{pageNum}-{type}.html
+    可获取：好中差评比例、总数，评价详细信息
+    pageSize固定为30，可据此结合总数算出总共需要多少页
+    type=0，全部评价
+    type=1，差品
+    type=2，中评
+    type=3，好评
+    type=4，晒单
+3，商品咨询信息：http://club.jd.com/allconsultations/{商品ID}-{pageNum}-{type}.html
+    pageSize固定为10
+    type=1，全部咨询
+    type=2，商品咨询
+    type=3，库存配送
+    type=4，支付
+    type=5，发票保修
+4，商品网友讨论信息：http://club.jd.com/bbs/{商品ID}-{pageNum}-{order}-{type}.html
+    pageSize固定为40
+    order=0，时间倒序
+    order=1，回复数倒序
+    order=2，点击数倒序
+    type=0，所有讨论
+    type=1，普通讨论
+    type=2，问答讨论
+    type=3，圈子贴
+    type=4，晒单讨论
+    另外，讨论页面可获取热门话题的连接
+
+
+5，京东url规则：
+http://list.jd.com/737-794-880-0-0-0-0-0-0-0-1-1-1-1-19-1607-3155-33.html
+http://list.jd.com/{大类}-{二级大类}-{三级大类}-{品牌}-{小类}-{二级小类}-0-0-0-0-1-1-1-1-19-1607-3155-33.html

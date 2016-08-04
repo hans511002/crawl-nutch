@@ -1,0 +1,18 @@
+1，商品展示页面：http://product.suning.com/{商品ID}.html
+    可获取：价格(在js代码中)，商品介绍，参数定义，装箱清单
+    不可获取：参数值，评价信息
+2，商品评价页面：http://zone.suning.com/review/product_review/{18位商品id(不足前面补0)}-{type}-{pageNum}--.html
+    每个type头可获得该类评价总数
+    pageSize固定为20，可据此结合总数算出总共需要多少页
+    type=0，全部评价
+    type=1，好评
+    type=2，中评
+    type=3，差评
+    type=4，追评
+    type=5，晒单
+3，商品晒单页面：http://zone.suning.com/review/product_orderShow/{18位商品id}-{type}-{pageNum}--.html
+    type=0，全部晒单
+    type=1，图片晒单
+    type=2，视频晒单
+    type=3，精华晒单
+4，商品咨询？没找到单独的咨询页面，在商品展示页ajax加载有

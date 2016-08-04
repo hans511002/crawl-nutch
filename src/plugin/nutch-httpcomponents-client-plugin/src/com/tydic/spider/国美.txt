@@ -1,0 +1,18 @@
+1，商品展示页面：http://www.gome.com.cn/product/{商品ID}.html
+    可获取：价格（js代码中），商品详情，参数规格，包装配送，售后服务，其他同类品牌的连接
+    不可获取：促销信息
+2，商品评价页面：http://www.gome.com.cn/reviews/{商品ID}-{type}-{pageNum}.html
+    pageSize固定20
+    type=0，全部评价
+    type=1，好评
+    type=2，中评
+    type=3，差评
+3，商品咨询页面：http://www.gome.com.cn/consultations/{商品ID}-{type}-{pageNum}.html
+    pageSize固定20
+    type=0，全部咨询
+    type=1，商品咨询
+    type=2，库存与配送
+    type=3，支付问题
+    type=4，发票问题
+    type=5，电话订购
+4，商品晒单？没找到单独页面，展示页ajax加载的评价内容里包含了晒单，可连接到bbs

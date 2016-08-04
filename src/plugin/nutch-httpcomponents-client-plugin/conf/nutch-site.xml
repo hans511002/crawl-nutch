@@ -1,0 +1,93 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
+
+<!-- Put site-specific property overrides in this file. -->
+
+<configuration>
+        <property>
+                <name>http.agent.name</name>
+        <!--    <value>nutch-solr-integration</value> -->
+                <value>blog.sina.com.cn</value>
+        </property>
+        <property>
+                <name>generate.max.per.host</name>
+                <value>1000</value>
+        </property>
+        <property>
+                <name>plugin.includes</name>
+                <value>parse-image|lib-http|protocol-httpclient-component|urlfilter-regex|parse-html|index-(basic|anchor)|query-(basic|site|url)|response-(json|xml)|summary-basic|scoring-o
+pic|urlnormalizer-(pass|regex|basic)</value>
+        </property>
+        <property>
+                <name>http.timeout</name>
+                <value>5000</value>
+                <description>The default network timeout, in milliseconds.</description>
+        </property>
+        <property> 
+           <name>http.proxy.host</name> 
+           <value></value> 
+           <description>The proxy hostname.  If empty, no proxy is used.</description> 
+        </property> 
+        <property> 
+           <name>http.proxy.port</name> 
+           <value></value> 
+           <description>The proxy port.</description> 
+        </property> 
+        <property>
+                <name>http.content.limit</name>
+                <value>1048576</value>
+                <description>The length limit for downloaded content using the http://
+                protocol, in bytes. If this value is nonnegative (>=0), content longer
+                than it will be truncated; otherwise, no truncation at all. Do not
+                confuse this setting with the file.content.limit setting.
+                </description>
+        </property>
+        <property>
+                <name>http.useHttp11</name>
+                <value>true</value>
+                <description>NOTE: at the moment this works only for protocol-httpclient.
+                If true, use HTTP 1.1, if false use HTTP 1.0 .
+                </description>
+        </property>
+        <property>
+               <name>http.auth.file</name>
+               <value>httpclient-auth.xml</value>
+               <description>Authentication configuration file for 'protocol-httpclient' plugin.
+               </description>
+        </property>
+        <property>
+                <name>fetcher.server.delay</name>
+                <value>1.0</value>
+                <description>The number of seconds the fetcher will delay between 
+                successive requests to the same server.</description>
+        </property>
+        <property>
+                <name>fetcher.threads.fetch</name>
+                <value>20</value>
+                <description>The number of FetcherThreads the fetcher should use.
+                This is also determines the maximum number of requests that are
+                made at once (each FetcherThread handles one connection). The total
+                number of threads running in distributed mode will be the number of
+                fetcher threads * number of nodes as fetcher has one map task per node.
+                </description>
+        </property>
+        <property>
+                <name>fetcher.threads.per.queue</name>
+                <value>200</value>
+                <description>This number is the maximum number of threads that
+                should be allowed to access a queue at one time. Replaces 
+                deprecated parameter 'fetcher.threads.per.host'.
+                </description>
+        </property>
+        <property>
+                <name>plugin.folders</name>
+                <value>plugins</value>
+                <description>Directories where nutch plugins are located.  Each
+                element may be a relative or absolute path.  If absolute, it is used
+                as is.  If relative, it is searched for on the classpath.</description>
+        </property>
+        <property>
+				<name>mapreduce.job.jar.unpack.pattern</name>
+				<value>(?:classes/|lib/|plugins/).*</value>
+		</property>
+</configuration>
